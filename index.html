@@ -26,15 +26,12 @@
     </p>
     
     <button 
-    class = "greeting"
-    onclick="
-    showQuestion()
-    removeGreeting()"
-
-    >
+    class = "greeting" id = "start-btn">
       Start Game
     </button>
 
+    <div id = "score-display"> Score: 0</div>
+    <div id = high-score-display> High Score : 0</div>
     <div id = "quiz-section">
       <h1 id = "question"></h1>
 
@@ -43,6 +40,9 @@
       <button class = "answer-btn"></button>
       <button class = "answer-btn"></button>
     </div>
+
+    <button id = "retry"> Retry </button>
+    <button id = "reset"> Reset High Score </button>
    
 
     <script src="script.js"></script>

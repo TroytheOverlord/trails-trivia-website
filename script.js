@@ -1,6 +1,5 @@
 
-let currentQuestionIndex = 0;
-let score = 0;
+// -------------------------------------------------------------- Questions -------------------------------------------------------- //
 
 const questions = [
   {
@@ -65,8 +64,37 @@ const questions = [
   }
 ];
 
+// -------------------------------------------------------------- Variables -------------------------------------------------------- //
+let currentQuestionIndex = 0;
+let score = 0;
 const questionElement = document.getElementById("question");
 const buttons = document.querySelectorAll(".answer-btn");
+let highScore = parseInt(localStorage.getItem("High Score"));
+const retryButton = document.getElementById("retry");
+const resetButton = document.getElementById("reset");
+
+
+// -------------------------------------------------------------- Functions -------------------------------------------------------- //
+
+retryButton.style.display = "none";
+resetButton.style.display = "none";
+
+document.getElementById("start-btn").addEventListener("click", () => {
+  removeGreeting();
+  showQuestion();
+});
+
+document.getElementById("retry").addEventListener("click", () => {
+  restartGame();
+});
+
+document.getElementById("reset").addEventListener("click", () => {
+  localStorage.removeItem("High Score");
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+  displayHighScore();
+})
 
 
 // Randomizes the question order
@@ -94,8 +122,11 @@ function showQuestion(){
 function checkAnswer(selectedIndex){
   const current = questions[currentQuestionIndex];
   if(selectedIndex === current.answer){
-    score++
+    score++;
+    document.getElementById("score-display").textContent = `Score: ${score}`;
   }
+  document.getElementById("high-score-display").textContent = `Highest Score: ${highScore}`;
+  
 
   currentQuestionIndex++;
 
@@ -106,6 +137,11 @@ function checkAnswer(selectedIndex){
   else{
     questionElement.textContent = `Game Over Your score: ${score}/${questions.length}`;
     buttons.forEach(btn => btn.style.display = "none");
+    getHighScore();
+    displayHighScore();
+
+    retryButton.style.display = "block";
+    resetButton.style.display = "block";
   }  
 }
 
@@ -113,5 +149,25 @@ function removeGreeting(){
     const greetText = document.querySelectorAll(".greeting");
     greetText.forEach(el => el.remove());
 }
+
+function restartGame(){
+  window.location.reload();
+}
+
+function getHighScore(){
+  if(score > highScore){
+    localStorage.setItem("High Score", score);
+    highScore = parseInt(localStorage.getItem("High Score"));
+  }
+  return highScore;
+  
+}
+
+function displayHighScore() {
+  highScore = parseInt(localStorage.getItem("High Score")) || 0;
+  document.getElementById("high-score-display").textContent = `Highest Score: ${highScore}`;
+}
+
+
 
 
