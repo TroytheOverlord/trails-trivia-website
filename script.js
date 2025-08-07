@@ -72,6 +72,7 @@ const buttons = document.querySelectorAll(".answer-btn");
 let highScore = parseInt(localStorage.getItem("High Score"));
 const retryButton = document.getElementById("retry");
 const resetButton = document.getElementById("reset");
+const tracker = document.getElementById("tracker");
 
 
 // -------------------------------------------------------------- Functions -------------------------------------------------------- //
@@ -111,6 +112,7 @@ shuffle(questions);
 function showQuestion(){
   const current = questions[currentQuestionIndex];
   questionElement.textContent = current.question;
+  tracker.textContent = `Question ${currentQuestionIndex + 1} of ${questions.length}`;
 
   buttons.forEach((btn, index) => {
     btn.textContent = current.choices[index];
@@ -123,26 +125,45 @@ function checkAnswer(selectedIndex){
   const current = questions[currentQuestionIndex];
   if(selectedIndex === current.answer){
     score++;
-    document.getElementById("score-display").textContent = `Score: ${score}`;
+    buttons[selectedIndex].style.backgroundColor = "green";
+    buttons.forEach(btn => btn.disabled = true);
   }
+
+  else if(selectedIndex != current.answer){
+    buttons[selectedIndex].style.backgroundColor = "red";
+    buttons.forEach(btn => btn.disabled = true);
+  }
+
+  
+    
+  document.getElementById("score-display").textContent = `Score: ${score}`;
   document.getElementById("high-score-display").textContent = `Highest Score: ${highScore}`;
   
+  setTimeout(() => {
+    buttons[selectedIndex].style.backgroundColor = "black";
+    currentQuestionIndex++;
+    
+    
+    buttons.forEach(btn => {
+      btn.disabled = false;
+      btn.style.backgroundColor = "black";
+    })
 
-  currentQuestionIndex++;
-
-  if(currentQuestionIndex < questions.length){
+    if(currentQuestionIndex < questions.length){
     showQuestion();
-  }
+    }
 
-  else{
-    questionElement.textContent = `Game Over Your score: ${score}/${questions.length}`;
-    buttons.forEach(btn => btn.style.display = "none");
-    getHighScore();
-    displayHighScore();
+    else{
+      questionElement.textContent = `Game Over Your score: ${score}/${questions.length}`;
+      buttons.forEach(btn => btn.style.display = "none");
+      getHighScore();
+      displayHighScore();
 
-    retryButton.style.display = "block";
-    resetButton.style.display = "block";
-  }  
+      retryButton.style.display = "block";
+      resetButton.style.display = "block";
+    }  
+  }, 2000);
+  
 }
 
 function removeGreeting(){
@@ -166,6 +187,12 @@ function getHighScore(){
 function displayHighScore() {
   highScore = parseInt(localStorage.getItem("High Score")) || 0;
   document.getElementById("high-score-display").textContent = `Highest Score: ${highScore}`;
+}
+
+function resetQuestionArea(){
+    currentQuestionIndex++;
+    buttons[selectedIndex].style.backgroundColor = "black";
+    buttons.forEach(btn => btn.disabled = false);
 }
 
 
