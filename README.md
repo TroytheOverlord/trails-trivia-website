@@ -1,62 +1,50 @@
 # Trails Trivia
 
-Welcome to **Trails Trivia** – a fast-paced, browser-based quiz game for fans of the *Trails* video game series! Challenge your knowledge across multiple story arcs, track your score, and aim for the high score. Whether you're a longtime Zemurian traveler or just discovering the world, Trails Trivia is a fun way to test your memory and learn more about these beloved games.
+Trails Trivia is a browser-based quiz game inspired by the Trails video game series. It’s designed to test players’ knowledge across multiple arcs while demonstrating clean front-end development practices such as modular JavaScript, JSON-driven data, and localStorage persistence.
 
 ---
 
 ## 🎮 Overview
 
-Trails Trivia is inspired by the *Trails* series (Sky, Crossbell, Cold Steel) and provides a dynamic quiz experience. Each play session features randomized questions, instant feedback, and persistent high scores. Choose your favorite arc, answer as many questions as you can, and see how you compare to your previous best!
+- A dynamic multiple-choice quiz built with HTML, CSS, and JavaScript
+
+- Question data stored in JSON for easy updates and extensions
+
+- Tracks scores and high scores using localStorage
+
+- Randomized questions and instant feedback keep gameplay fresh
 
 ---
 
 ## ✨ Main Features
 
-- **Multiple Game Modes:** Select from Sky, Crossbell, and Cold Steel arcs
-- **Dynamic Question Sets:** Loads questions from JSON files for each mode
-- **Randomized Order:** No two games are the same!
-- **Score Tracking:** See your current score and high score live
-- **LocalStorage High Scores:** Your best score is saved and displayed
-- **Visual Feedback:** Instantly know if your answer is correct or incorrect
-- **Intuitive UI:** Start/mode buttons, answer selections, score display, and retry/reset controls
+Multiple Modes – Play through questions from Sky, Crossbell, or Cold Steel arcs
+
+Dynamic JSON Question Sets – Easily extendable or customizable
+
+Score & High Score Tracking – Persistent via localStorage
+
+Responsive UI – Simple, intuitive layout with instant answer feedback
+
+Replayability – Randomized order ensures no two runs are the same
 
 ---
 
 ## 🕹️ How to Play
 
-1. **Choose a Game Mode:** Click the *Start* button and pick your preferred arc (Sky, Crossbell, or Cold Steel).
-2. **Answer Questions:** Each question appears with multiple answer buttons. Click your choice!
-3. **See Feedback:** The app highlights your selection as correct or incorrect and moves to the next question.
-4. **Track Your Progress:** Your current score and high score are always visible.
-5. **Retry or Reset:** Play again using the retry/reset buttons to challenge yourself or switch modes.
-
-**Example UI Flow:**
-
-```
-[Start Game] [Select Mode: Sky | Crossbell | Cold Steel]
-[Question: Who is the protagonist of Trails in the Sky?]
-[Answer Buttons: Estelle | Lloyd | Rean | Joshua]
-[Score: 3 | High Score: 5]
-[✓ Correct!]
-[Next Question...]
-```
+1. Open the game in your browser.
+2. Choose a mode (Sky, Crossbell, or Cold Steel).
+3. Answer questions by clicking one of the four options.
+4. Get immediate feedback on whether you were correct.
+5. Try to beat your saved high score!
 
 ---
 
 ## 🚀 Setup & Run Locally
-
-1. **Clone the Repository:**
-   ```bash
+   ```
    git clone https://github.com/yourusername/trails-trivia.git
    cd trails-trivia
    ```
-2. **Open the App:**
-   - No build steps required.
-   - Simply open `index.html` in your web browser.
-
-3. **(Optional) Customize Questions:**
-   - Edit or add to `data/questions.json` or other question files to expand your trivia bank.
-
 ---
 
 ## 📁 File Structure
@@ -91,18 +79,22 @@ trails-trivia/
 
 ## 🌱 Future Improvements
 
-- **Responsive Design:** Optimized for mobile and tablet play
-- **Additional Modes:** Add new arcs or challenge modes (e.g., Boss Rush, Timed Quiz)
-- **Expanded Question Banks:** Community or official contributions for more questions
-- **Sound Effects & Animations:** Enhance feedback and immersion
-- **Leaderboard:** Online or local leaderboard support
+- Mobile responsiveness and accessibility improvements
+
+- Expanded question banks (fan/community contributions)
+
+- Timed mode or boss rush challenge
+
+- Sound effects & animations
+
+- Online leaderboard support
+---
+
+## 💬 Contributions
+
+Suggestions and contributions are welcome. If you’d like to expand the question bank or add a new mode, just create a pull request!
+Trails Trivia is for fans and by fans – help me make it even better.
 
 ---
 
-## 💬 Feedback & Contributions
-
-Questions, suggestions, or want to contribute? Feel free to open an issue or pull request! Trails Trivia is for fans and by fans – help us make it even better.
-
----
-
-**Enjoy your adventure in Trails Trivia!**
+**Enjoy your time with Trails Trivia!**
