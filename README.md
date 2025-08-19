@@ -2,6 +2,8 @@
 
 Trails Trivia is a browser-based quiz game inspired by the Trails video game series. It’s designed to test players’ knowledge across multiple arcs while demonstrating clean front-end development practices such as modular JavaScript, JSON-driven data, and localStorage persistence.
 
+Live Link: https://troytheoverlord.github.io/trails-trivia-website/
+
 ---
 
 ## 🎮 Overview
