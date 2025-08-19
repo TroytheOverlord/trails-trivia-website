@@ -8,28 +8,21 @@ Live Link: https://troytheoverlord.github.io/trails-trivia-website/
 
 ## 🎮 Overview
 
-- A dynamic multiple-choice quiz built with HTML, CSS, and JavaScript
-
-- Question data stored in JSON for easy updates and extensions
-
-- Tracks scores and high scores using localStorage
-
-- Randomized questions and instant feedback keep gameplay fresh
+Trails Trivia is a fast-paced multiple-choice quiz built with **HTML, CSS, and JavaScript**.  
+All questions are stored in **JSON**, making it easy to expand or customize the quiz.  
+The game tracks both **scores and high scores** using localStorage, ensuring progress is remembered.  
+With **randomized questions** and **instant feedback**, no two playthroughs feel the same.
 
 ---
 
 ## ✨ Main Features
 
-Multiple Modes – Play through questions from Sky, Crossbell, or Cold Steel arcs
-
-Dynamic JSON Question Sets – Easily extendable or customizable
-
-Score & High Score Tracking – Persistent via localStorage
-
-Responsive UI – Simple, intuitive layout with instant answer feedback
-
-Replayability – Randomized order ensures no two runs are the same
-
+- **Multiple Modes** – Play through Sky, Crossbell, or Cold Steel arcs  
+- **Dynamic Question Sets** – JSON-driven and easy to expand  
+- **Score & High Score Tracking** – Persistent with localStorage  
+- **Replayability** – Randomized order keeps runs fresh  
+- **Responsive UI** – Simple, intuitive, and provides instant feedback
+ 
 ---
 
 ## 🕹️ How to Play
@@ -75,23 +68,21 @@ trails-trivia/
 
 ## 🛠️ Technologies Used
 
-- **HTML5:** App structure and UI elements
-- **CSS3:** Styling, layout, and visual feedback
-- **JavaScript (ES6):** Game logic, dynamic question loading, and localStorage management
+- **HTML5** – Structured the core interface of the quiz.  
+- **CSS3** – Styled the app with a responsive layout, color-coded feedback for correct/incorrect answers, and a clean visual design.  
+- **JavaScript** – Powered all game logic, including question randomization, JSON data loading, and persistent score tracking via localStorage.
 
 ---
 
 ## 🌱 Future Improvements
 
-- Mobile responsiveness and accessibility improvements
+While the core game is complete, there are still several features that could expand replayability and polish:
 
-- Expanded question banks (fan/community contributions)
-
-- Timed mode or boss rush challenge
-
-- Sound effects & animations
-
-- Online leaderboard support
+- **Mobile & Accessibility Enhancements** – Optimize for small screens and improve accessibility for all players.  
+- **Expanded Question Banks** – Grow the trivia library with fan-submitted content.  
+- **Challenge Modes** – Introduce a timed mode or survival style marathon for advanced players.  
+- **Audio & Visual Feedback** – Add sound effects and subtle animations to create a more engaging experience.  
+- **Online Leaderboards** – Allow players to compete globally and track community high scores.  
 ---
 
 ## 💬 Contributions
