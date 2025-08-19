@@ -22,17 +22,32 @@
     </p>
 
     <p class = "greeting">
-      So are you guys ready to start if so press Start Game
+      So are you guys ready to start if so press choose a quiz to start
     </p>
     
-    <button 
-    class = "greeting" id = "start-btn">
-      Start Game
-    </button>
+    <div id = "modeOptions">
+      <button 
+      class = "gameMode" id = "start-btn">
+        General
+      </button>
+
+      <button class = "gameMode" id = "sky-btn">
+        Sky Quiz
+      </button>
+
+      <button class = "gameMode" id = "crossbell-btn">
+        Crossbell Quiz
+      </button>
+
+      <button class = "gameMode" id = "coldsteel-btn">
+        Cold Steel Quiz 
+      </button>
+    </div>
+    
 
     <div id = "score-display"> Score: 0</div>
     <div id = "tracker"> Question 0 of 0</div>
-    <div id = high-score-display> High Score : 0</div>
+    <div id = "high-score-display"> High Score : 0</div>
     <div id = "quiz-section">
       <h1 id = "question"></h1>
 
@@ -43,7 +58,7 @@
     </div>
 
     <div id = "action-buttons">
-      <button id = "retry"> Retry </button>
+      <button id = "retry"> Back to Main Menu </button>
       <button id = "reset"> Reset High Score </button>
     </div>
     

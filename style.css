@@ -50,8 +50,16 @@ button:hover{
   line-height: 1.5;
 }
 
-#start-btn{
+.gameMode{
   color:white;
+}
+
+#modeOptions{
+  width: 100%;
+  max-width: 680px;
+  padding: 20px;
+  margin-bottom: 20px;
+  align-items: center;
 }
 
 #high-score-display {
@@ -86,3 +94,10 @@ button:hover{
     padding: 15px;
   }
 }
+
+.answer-btn { transition: background-color 0.2s ease; }
+.answer-btn.correct { background-color: #2e7d32; color: white; }
+.answer-btn.wrong   { background-color: #c62828; color: white; }
+
+.answer-btn.focused { outline: 2px solid #8cf5ee; /* visible ring */ }
+

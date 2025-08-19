@@ -1,88 +1,83 @@
 
 // -------------------------------------------------------------- Questions -------------------------------------------------------- //
 
-const questions = [
-  {
-
-    question: "What is the name of the recurring NPC who is known for failing at romance",
-    choices: ["A. Nielson", "B. Ricky", "C. Campanella", "D. Anton"],
-    answer: 3
-  },
-
-  {
-      question: "What year does Trails from Zero take place",
-      choices: ["A. 1202", "B. 1207", "C. 1204", "D. 1210"],
-      answer: 2
-  }, 
-
-  {
-      question: "How does the SSS survive their initial encounter with Joachim",
-      choices: ["A. Estelle, Joshua and Renne help them", "B. Kevin freezes Joachim", "C. Arios saves the day", "D. They don't"],
-      answer: 3
-  },
-
-  {
-      question: "Where does Laura place on the midterm rankings in Cold Steel 1",
-      choices: ["A. 7th", "B. 17th", "C. 20th", "D. 36th"],
-      answer: 1
-  },
-
-  {
-      question: "Which game does Gideon of the Imperial Liberation Front make his first appearance",
-      choices: ["A. Trails to Azure", "B. Cold Steel 1", "C. Cold Steel 2", "D. Trails from Zero"],
-      answer: 0
-  },
-
-  {
-      question: "Who's alias is the Black Whirlwind",
-      choices: ["A. Aurelia Le Guin", "B. Wallace Bardias", "C. Gaius Worzel", "D. Garcia Rossi"],
-      answer: 1
-  },
-
-  {
-      question: "Which of these is not a craft used by Kevin",
-      choices: ["A. Mortal Punishment", "B. Crossgear Rage", "C. Sacred Breath", "D. Infinity Sparrows"],
-      answer: 3
-  },
-
-  {
-      question: "How many playable characters are in Trail into Reverie",
-      choices: ["A. 47", "B. 51", "C. 53", "D. 49"],
-      answer: 1
-  },
-
-  {
-      question: "Who is the youngest of these character upon their initial introduction",
-      choices: ["A. Tio Plato", "B. Tita Russell", "C. Renne Hayworth", "D. Ferida Al-Fayed"],
-      answer: 2
-  },
-
-  {
-      question: "What's the name of the ost that plays during the final boss of Trails in the Sky SC",
-      choices: ["A. Get Over the Barrier", "B. Fateful Confrontation", "C. Merciless Savior", "D. Whereabouts of Hope"],
-      answer: 2
-  }
-];
+let questions = [];
 
 // -------------------------------------------------------------- Variables -------------------------------------------------------- //
 let currentQuestionIndex = 0;
 let score = 0;
+let highScore = 0;
+
 const questionElement = document.getElementById("question");
 const buttons = document.querySelectorAll(".answer-btn");
-let highScore = parseInt(localStorage.getItem("High Score"));
 const retryButton = document.getElementById("retry");
 const resetButton = document.getElementById("reset");
 const tracker = document.getElementById("tracker");
+const scoreEl = document.getElementById("score-display");
+const hsEl = document.getElementById("high-score-display");
+
+const modeContainer = document.getElementById("modeOptions");
+const modeMap = {
+  "start-btn": "./data/questions.json",
+  "sky-btn": "./data/sky-questions.json",
+  "crossbell-btn": "./data/crossbell-questions.json",
+  "coldsteel-btn": "./data/coldsteel-questions.json",
+}
+
+let currentMode = null;
+let isLocked = false;
+let highlighted = 0;
 
 
-// -------------------------------------------------------------- Functions -------------------------------------------------------- //
+// ----------------------------------------------------------- Main page Setup -------------------------------------------------------- //
 
 retryButton.style.display = "none";
 resetButton.style.display = "none";
 
-document.getElementById("start-btn").addEventListener("click", () => {
-  removeGreeting();
-  showQuestion();
+document.addEventListener("DOMContentLoaded", () => {
+  
+  modeContainer.addEventListener("click", (e) => {
+  const btn = e.target.closest(".gameMode");
+    if (!btn) return; 
+
+    const path = modeMap[btn.id];
+    currentMode = btn.id;
+    if (!path) return;
+
+    // disables buttons while loading
+    setModeButtonsEnabled(true);
+
+    loadQuestions(path)
+      .then(() => {
+        removeGreeting();     
+        showQuestion();    
+        updateTracker();   
+      })
+      .catch(err => {
+        console.error(err);
+        // re-enable so user can try another mode
+        setModeButtonsEnabled(false);
+      });
+    });
+    
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if (isLocked) return;
+
+    if (e.key === "ArrowDown" || e.key === "ArrowRight") {
+      highlighted = (highlighted + 1) % buttons.length;
+      updateFocusRing();
+    } 
+    
+    else if (e.key === "ArrowUp" || e.key === "ArrowLeft") {
+      highlighted = (highlighted - 1 + buttons.length) % buttons.length;
+      updateFocusRing();
+    } 
+    
+    else if (e.key === "Enter") {
+        buttons[highlighted].click();
+    }
 });
 
 document.getElementById("retry").addEventListener("click", () => {
@@ -90,13 +85,15 @@ document.getElementById("retry").addEventListener("click", () => {
 });
 
 document.getElementById("reset").addEventListener("click", () => {
-  localStorage.removeItem("High Score");
+  localStorage.removeItem(hsKey());
+  displayHighScore();
 });
 
 document.addEventListener("DOMContentLoaded", () => {
   displayHighScore();
 })
 
+// -------------------------------------------------------------- Functions -------------------------------------------------------- //
 
 // Randomizes the question order
 function shuffle(array) {
@@ -106,62 +103,49 @@ function shuffle(array) {
   }
 }
 
-shuffle(questions);
+//shuffle(questions);
 
 // Display the questions to the screen
 function showQuestion(){
   const current = questions[currentQuestionIndex];
   questionElement.textContent = current.question;
-  tracker.textContent = `Question ${currentQuestionIndex + 1} of ${questions.length}`;
 
-  buttons.forEach((btn, index) => {
-    btn.textContent = current.choices[index];
-    btn.onclick = () => checkAnswer(index);
-  });
+  wireAnswerButtons();
+  updateTracker();
+
 }
 
 // Checks the user answers and increments the score if correct
 function checkAnswer(selectedIndex){
+  if(lockUI(false)) return;
+
+  lockUI(true);
   const current = questions[currentQuestionIndex];
   if(selectedIndex === current.answer){
     score++;
-    buttons[selectedIndex].style.backgroundColor = "green";
-    buttons.forEach(btn => btn.disabled = true);
+    markAnswer(selectedIndex, true);
   }
 
   else if(selectedIndex != current.answer){
-    buttons[selectedIndex].style.backgroundColor = "red";
-    buttons.forEach(btn => btn.disabled = true);
+   markAnswer(selectedIndex, false);
   }
 
-  
-    
-  document.getElementById("score-display").textContent = `Score: ${score}`;
-  document.getElementById("high-score-display").textContent = `Highest Score: ${highScore}`;
+  updateScoreUI();
   
   setTimeout(() => {
-    buttons[selectedIndex].style.backgroundColor = "black";
+    lockUI(false);
     currentQuestionIndex++;
     
-    
-    buttons.forEach(btn => {
-      btn.disabled = false;
-      btn.style.backgroundColor = "black";
-    })
+    clearAnswerMarks();
 
     if(currentQuestionIndex < questions.length){
     showQuestion();
     }
 
     else{
-      questionElement.textContent = `Game Over Your score: ${score}/${questions.length}`;
-      buttons.forEach(btn => btn.style.display = "none");
-      getHighScore();
-      displayHighScore();
-
-      retryButton.style.display = "block";
-      resetButton.style.display = "block";
+     showGameOver();
     }  
+    isLocked = false;
   }, 2000);
   
 }
@@ -169,6 +153,9 @@ function checkAnswer(selectedIndex){
 function removeGreeting(){
     const greetText = document.querySelectorAll(".greeting");
     greetText.forEach(el => el.remove());
+
+    const gameMode = document.querySelectorAll(".gameMode");
+    gameMode.forEach(el => el.remove());
 }
 
 function restartGame(){
@@ -177,23 +164,110 @@ function restartGame(){
 
 function getHighScore(){
   if(score > highScore){
-    localStorage.setItem("High Score", score);
-    highScore = parseInt(localStorage.getItem("High Score"));
+    localStorage.setItem(hsKey(), score);
+    highScore = score;
   }
   return highScore;
-  
+}
+
+function hsKey(){
+  const mode = (currentMode || "start-btn").replace("-btn", "");
+  return `HS: ${mode}`;
 }
 
 function displayHighScore() {
-  highScore = parseInt(localStorage.getItem("High Score")) || 0;
-  document.getElementById("high-score-display").textContent = `Highest Score: ${highScore}`;
+  highScore = parseInt(localStorage.getItem(hsKey())) || 0;
+  hsEl.textContent = `Highest Score: ${highScore}`;
 }
 
-function resetQuestionArea(){
-    currentQuestionIndex++;
-    buttons[selectedIndex].style.backgroundColor = "black";
-    buttons.forEach(btn => btn.disabled = false);
+
+function loadQuestions(path) {
+  return fetch(path)
+    .then(res => {
+      if (!res.ok) throw new Error(`Failed to load ${path}`);
+      return res.json();
+    })
+    .then(data => {
+      const clean = data.filter(q =>
+        q &&
+        typeof q.question === "string" &&
+        Array.isArray(q.choices) && q.choices.length === 4 &&
+        Number.isInteger(q.answer) && q.answer >= 0 && q.answer < 4
+      );
+
+      if (!clean.length) throw new Error("No valid questions found");
+
+      questions = clean;
+      currentQuestionIndex = 0;
+      score = 0;
+      shuffle(questions);
+
+      // update UI bits tied to state
+      scoreEl.textContent = "Score: 0";
+      document.getElementById("tracker").textContent = `Question 1 of ${questions.length}`;
+
+      displayHighScore();
+      updateScoreUI();
+
+      // re-enable buttons 
+      setModeButtonsEnabled(false);
+    });
 }
+
+function updateFocusRing() {
+  buttons.forEach((b, i) => {
+    b.classList.toggle("focused", i === highlighted);
+  });
+}
+
+function lockUI(state){
+  isLocked = state;
+  buttons.forEach(b => b.disabled = state);
+}
+
+function updateScoreUI(){
+  scoreEl.textContent = `Score: ${score}`;
+  hsEl.textContent = `High Score: ${highScore}`;
+}
+
+function markAnswer(index, isCorrect){
+  buttons[index].classList.add(isCorrect ? "correct" : "wrong");
+}
+
+function clearAnswerMarks(){
+  buttons.forEach(b => b.classList.remove("correct", "wrong"));
+}
+
+function updateTracker(){
+  tracker.textContent = `Question ${currentQuestionIndex + 1} of ${questions.length}`;
+}
+
+function wireAnswerButtons(){
+  const current = questions[currentQuestionIndex];
+  
+  buttons.forEach((btn, index) => {
+    btn.textContent = current.choices[index];
+    btn.onclick = () => checkAnswer(index);
+  });
+}
+
+function setModeButtonsEnabled(enabled){
+  modeContainer
+    .querySelectorAll(".gameMode")
+    .forEach(b => b.disabled = !enabled);
+}
+
+function showGameOver() {
+  questionElement.textContent = `Game Over Your score: ${score}/${questions.length}`;
+  buttons.forEach(btn => btn.style.display = "none");
+  getHighScore();
+  displayHighScore();     
+  updateScoreUI();
+
+  retryButton.style.display = "block";
+  resetButton.style.display = "block";
+}
+
 
 
 
