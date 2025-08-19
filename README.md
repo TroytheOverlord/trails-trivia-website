@@ -1,6 +1,6 @@
 # Trails Trivia
 
-Trails Trivia is a browser-based quiz game inspired by the Trails video game series. It’s designed to test players’ knowledge across multiple arcs while demonstrating clean front-end development practices such as modular JavaScript, JSON-driven data, and localStorage persistence.
+Trails Trivia is a browser-based quiz game inspired by the Trails series. It tests player knowledge across multiple arcs while showcasing modular JavaScript, JSON-driven data, and localStorage for persistent scores.
 
 Live Link: https://troytheoverlord.github.io/trails-trivia-website/
 
@@ -34,19 +34,21 @@ Replayability – Randomized order ensures no two runs are the same
 
 ## 🕹️ How to Play
 
-1. Open the game in your browser.
+1. Click the game link.
 2. Choose a mode (Sky, Crossbell, or Cold Steel).
 3. Answer questions by clicking one of the four options.
-4. Get immediate feedback on whether you were correct.
-5. Try to beat your saved high score!
+4. Try to beat your saved high score!
 
 ---
 
-## 🚀 Setup & Run Locally
-   ```
-   git clone https://github.com/yourusername/trails-trivia.git
-   cd trails-trivia
-   ```
+## 🚀 Screenshots
+
+<img width="1440" height="777" alt="Screenshot 2025-08-19 at 12 16 10 PM" src="https://github.com/user-attachments/assets/d7a06f8c-1153-4a44-8a5c-d7a30b2666aa" />
+<img width="1440" height="778" alt="Screenshot 2025-08-19 at 12 16 28 PM" src="https://github.com/user-attachments/assets/466c0549-a51e-4415-9afc-e8effdcd5286" />
+<img width="1440" height="777" alt="Screenshot 2025-08-19 at 12 16 54 PM" src="https://github.com/user-attachments/assets/251b6c5a-0197-478a-986e-8a320195a8f3" />
+<img width="1440" height="777" alt="Screenshot 2025-08-19 at 12 17 42 PM" src="https://github.com/user-attachments/assets/6df1715c-a37d-475d-9f5f-b8442d0eec26" />
+
+
 ---
 
 ## 📁 File Structure
@@ -56,7 +58,7 @@ trails-trivia/
 │
 ├── index.html               # Main HTML file
 ├── style.css                # App styling
-├── main.js                  # Game logic & UI control
+├── script.js                  # Game logic & UI control
 └── data/
     ├── questions.json       # Default question set
     ├── sky.json             # Sky arc questions
@@ -66,7 +68,7 @@ trails-trivia/
 
 - **index.html:** Structure of the app interface
 - **style.css:** Visual design and feedback cues
-- **main.js:** Game logic, score tracking, question loading, randomization
+- **script.js:** Game logic, score tracking, question loading, randomization
 - **data/*.json:** Question banks for each mode
 
 ---
@@ -75,7 +77,7 @@ trails-trivia/
 
 - **HTML5:** App structure and UI elements
 - **CSS3:** Styling, layout, and visual feedback
-- **JavaScript (ES6):** Game logic, dynamic question loading, localStorage management
+- **JavaScript (ES6):** Game logic, dynamic question loading, and localStorage management
 
 ---
 
