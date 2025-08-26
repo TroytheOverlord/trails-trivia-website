@@ -33,6 +33,7 @@ let highlighted = 0;
 
 retryButton.style.display = "none";
 resetButton.style.display = "none";
+tracker.textContent = "Select a game mode to start";
 
 document.addEventListener("DOMContentLoaded", () => {
   
@@ -45,7 +46,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!path) return;
 
     // disables buttons while loading
-    setModeButtonsEnabled(true);
+    setModeButtonsEnabled(false);
 
     loadQuestions(path)
       .then(() => {
@@ -56,7 +57,7 @@ document.addEventListener("DOMContentLoaded", () => {
       .catch(err => {
         console.error(err);
         // re-enable so user can try another mode
-        setModeButtonsEnabled(false);
+        setModeButtonsEnabled(true);
       });
     });
     
@@ -113,11 +114,15 @@ function showQuestion(){
   wireAnswerButtons();
   updateTracker();
 
+  highlighted = 0; 
+  updateFocusRing();
+  buttons[0].focus(); // focus the first button
+
 }
 
 // Checks the user answers and increments the score if correct
 function checkAnswer(selectedIndex){
-  if(lockUI(false)) return;
+  if(isLocked) return;
 
   lockUI(true);
   const current = questions[currentQuestionIndex];
@@ -126,7 +131,7 @@ function checkAnswer(selectedIndex){
     markAnswer(selectedIndex, true);
   }
 
-  else if(selectedIndex != current.answer){
+  else{
    markAnswer(selectedIndex, false);
   }
 
@@ -139,13 +144,13 @@ function checkAnswer(selectedIndex){
     clearAnswerMarks();
 
     if(currentQuestionIndex < questions.length){
-    showQuestion();
+      showQuestion();
     }
 
     else{
      showGameOver();
     }  
-    isLocked = false;
+    
   }, 2000);
   
 }
@@ -171,8 +176,8 @@ function getHighScore(){
 }
 
 function hsKey(){
-  const mode = (currentMode || "start-btn").replace("-btn", "");
-  return `HS: ${mode}`;
+  const mode = (currentMode || "start").replace("-btn", "");
+  return `HS:${mode}`;
 }
 
 function displayHighScore() {
@@ -227,7 +232,7 @@ function lockUI(state){
 
 function updateScoreUI(){
   scoreEl.textContent = `Score: ${score}`;
-  hsEl.textContent = `High Score: ${highScore}`;
+  hsEl.textContent = `Highest Score: ${highScore}`;
 }
 
 function markAnswer(index, isCorrect){
