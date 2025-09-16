@@ -3,67 +3,67 @@
 
     "question": "What was Loewe's alias while undercover in Sky First Chapter ",
     "choices": ["A. Lorence", "B. Leonhardt", "C. Schwarzritter", "D. Bladelord"],
-    "answer": 1
+    "answer": 0
   }, 
 
   {
 
-    "question": "What are the names of the members of Kurt Nardin's party that infilterated Ouroboros' base in Sky Second Chapter",
-    "choices": ["A. Kurt, Anelace, Clem, Grace", "B. Grant, Collins, Agate, Kurt", "C. Carna, Kurt, Anelace", "D. Grant"],
+    "question": "What are the names of the three members of Kurt Nardin's party that infilterated Ouroboros' base in Sky Second Chapter",
+    "choices": ["A. Anelace, Clem, Jill", "B. Grant, Lucy, Agate", "C. Carna, Anelace, Grant", "D. Grant, Aina, Hans"],
     "answer": 2
   },
 
   {
-      "question": "Which event drove Weissman to Ouroboros",
-      "choices": ["A. The Fall of the Zumerian Empire", "B. The Salt Pale", "C. 1204", "D. 1210"],
-      "answer": 2
+      "question": "What lead Weissman to join Ouroboros",
+      "choices": ["A. The Fall of the Zumerian Empire", "B. The Salt Pale Incident", "C. The Hundred Day War", "D. The Events of Hamel"],
+      "answer": 1
   }, 
 
   {
-      "question": "How does the SSS survive their initial encounter with Joachim",
-      "choices": ["A. Estelle, Joshua and Renne help them", "B. Kevin freezes Joachim", "C. Arios saves the day", "D. They don't"],
-      "answer": 3
+      "question": "What was Kevin's initial Alias",
+      "choices": ["A. Thousand Hand Guardian", "B. Thousand Arms", "C. Heretic Hunter", "D. Soaring Phoneix"],
+      "answer": 2
   },
 
   {
-      "question": "Where does Laura place on the midterm rankings in Cold Steel 1",
-      "choices": ["A. 7th", "B. 17th", "C. 20th", "D. 36th"],
-      "answer": 1
-  },
-
-  {
-      "question": "Which game does Gideon of the Imperial Liberation Front make his first appearance",
-      "choices": ["A. Trails to Azure", "B. Cold Steel 1", "C. Cold Steel 2", "D. Trails from Zero"],
+      "question": "Why does Zin stick around Estelle and Joshua in Sky FC",
+      "choices": ["A. A favor from Cassius", "B. He needed teammates for the Grancel tournament", "C. Tracking down Walter", "D. Bracer Duties"],
       "answer": 0
   },
 
   {
-      "question": "Who's alias is the Black Whirlwind",
-      "choices": ["A. Aurelia Le Guin", "B. Wallace Bardias", "C. Gaius Worzel", "D. Garcia Rossi"],
+      "question": "What's the name of the Organization Richard founds in Sky the 3rd",
+      "choices": ["A. Liberl Intelligence Divion", "B. R&A Research", "C. The Guardian Force", "D. Herceles"],
       "answer": 1
   },
 
   {
-      "question": "Which of these is not a craft used by Kevin",
-      "choices": ["A. Mortal Punishment", "B. Crossgear Rage", "C. Sacred Breath", "D. Infinity Sparrows"],
+      "question": "What's the relation between Duke Dunan to Kole",
+      "choices": ["A. Brother", "B. Father", "C. Cousin", "D. Uncle"],
       "answer": 3
   },
 
   {
-      "question": "How many playable characters are in Trail into Reverie",
-      "choices": ["A. 47", "B. 51", "C. 53", "D. 49"],
+      "question": "Which group was Agate apart of before becoming a Bracer",
+      "choices": ["A. The Fishermen's Guild", "B. Royal Army of Liberl", "C. The Sky Bandits", "D. The Raven Gang"],
+      "answer": 3
+  },
+
+  {
+      "question": "How many playable characters are in the Sky Triology",
+      "choices": ["A. 16", "B. 20", "C. 12", "D. 17"],
       "answer": 1
   },
 
   {
-      "question": "Who is the youngest of these character upon their initial introduction",
-      "choices": ["A. Tio Plato", "B. Tita Russell", "C. Renne Hayworth", "D. Ferida Al-Fayed"],
-      "answer": 2
+      "question": "Which of these characters have never had a Stigma",
+      "choices": ["A. Kevin Graham", "B. Ein Selnate", "C. Joshua Bright", "D. Ries Argent"],
+      "answer": 3
   },
 
   {
       "question": "What's the name of the ost that plays during the final boss of Trails in the Sky SC",
-      "choices": ["A. Get Over the Barrier", "B. Fateful Confrontation", "C. Merciless Savior", "D. Whereabouts of Hope"],
+      "choices": ["A. Hollow Light of the Selaed Land", "B. Fateful Confrontation", "C. Merciless Savior", "D. Whereabouts of Hope"],
       "answer": 2
   }
  ]
